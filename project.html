@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="Project Status - Jayansh Aryan">
     <title>Project Status - Jayansh Aryan</title>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -18,6 +18,7 @@
             color: #1a202c;
             overflow-x: hidden;
             line-height: 1.6;
+            touch-action: manipulation;
         }
         .nav-link {
             transition: all 0.3s ease;
@@ -27,127 +28,245 @@
             transform: scale(1.05);
         }
         .custom-button {
-            transition: all 0.5s ease;
+            transition: all 0.3s ease;
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            padding: 8px;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 16px;
         }
         .custom-button:hover {
-            transform: scale(1.1);
+            transform: scale(1.05);
             background-color: #7e22ce;
             color: #fff;
-        }
-        .parallax {
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
         }
         .social-icon {
             width: 24px;
             height: 24px;
-            background-color: #fff;
+            transition: transform 0.3s ease;
+        }
+        .social-icon:hover {
+            transform: scale(1.2);
+        }
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 24px;
+            color: #1a202c;
+        }
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(255, 255, 255, 0.98);
+            z-index: 9999;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .mobile-nav.active {
+            display: flex;
+            opacity: 1;
+        }
+        .mobile-nav a {
+            display: block;
+            padding: 15px;
+            font-size: 20px;
+            color: #1a202c;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .mobile-nav a:hover {
+            color: #9333ea;
+            transform: scale(1.05);
+        }
+        .close-mobile-nav {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            font-size: 28px;
+            color: #9333ea;
+            cursor: pointer;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 1024px) {
+            h1 {
+                font-size: 2.5rem !important;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .desktop-nav {
+                display: none;
+            }
+            .hamburger {
+                display: block;
+            }
+            nav {
+                padding: 15px 20px !important;
+            }
+            h1 {
+                font-size: 2rem !important;
+                line-height: 1.2 !important;
+            }
+            .hero-content p {
+                font-size: 18px !important;
+                padding: 0 15px !important;
+            }
+            .social-buttons {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 12px !important;
+            }
+            .custom-button {
+                width: 100%;
+                max-width: 200px;
+            }
+            section {
+                padding: 60px 20px !important;
+            }
+            footer .flex {
+                flex-wrap: wrap;
+                gap: 12px !important;
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem !important;
+            }
+            .hero-content p {
+                font-size: 16px !important;
+            }
+            footer p {
+                font-size: 14px !important;
+            }
         }
     </style>
 </head>
 <body class="min-h-screen relative">
-    <nav class="bg-white shadow-2xl py-5 sticky top-0 z-50">
-        <div class="container mx-auto flex justify-between items-center px-10">
-            <h1 class="text-3xl font-bold text-gray-900">Jayansh Aryan</h1>
-            <ul class="flex space-x-12">
-                <li><a href="index.html#home" class="nav-link text-gray-700">Home</a></li>
-                <li><a href="index.html#skills" class="nav-link text-gray-700">Skills</a></li>
-                <li><a href="index.html#projects" class="nav-link text-gray-700">Projects</a></li>
-                <li><a href="index.html#testimonials" class="nav-link text-gray-700">Testimonials</a></li>
-                <li><a href="index.html#contact" class="nav-link text-gray-700">Contact</a></li>
+    <!-- Mobile Navigation Button -->
+    <div class="fixed top-5 right-5 z-50 hamburger">
+        <i class="fas fa-bars"></i>
+    </div>
+
+    <!-- Mobile Navigation Menu -->
+    <div class="mobile-nav">
+        <span class="close-mobile-nav"><i class="fas fa-times"></i></span>
+        <a href="indexmobile.html#home" class="nav-link">Home</a>
+        <a href="indexmobile.html#skills" class="nav-link">Skills</a>
+        <a href="indexmobile.html#projects" class="nav-link">Projects</a>
+        <a href="indexmobile.html#testimonials" class="nav-link">Testimonials</a>
+        <a href="indexmobile.html#contact" class="nav-link">Contact</a>
+    </div>
+
+    <!-- Desktop Navigation -->
+    <nav class="bg-white shadow-2xl py-5 sticky top-0 z-40 desktop-nav">
+        <div class="container mx-auto px-5 flex justify-between items-center">
+            <h1 class="text-xl md:text-3xl font-bold text-gray-900">Jayansh Aryan</h1>
+            <ul class="hidden md:flex space-x-4 lg:space-x-8">
+                <li><a href="indexmobile.html#home" class="nav-link text-gray-700">Home</a></li>
+                <li><a href="indexmobile.html#skills" class="nav-link text-gray-700">Skills</a></li>
+                <li><a href="indexmobile.html#projects" class="nav-link text-gray-700">Projects</a></li>
+                <li><a href="indexmobile.html#testimonials" class="nav-link text-gray-700">Testimonials</a></li>
+                <li><a href="indexmobile.html#contact" class="nav-link text-gray-700">Contact</a></li>
             </ul>
         </div>
     </nav>
 
-    <section id="project-status" class="min-h-screen flex items-center justify-center py-20 relative z-10 parallax">
+    <section id="project-status" class="min-h-screen flex items-center justify-center py-20 px-5 relative z-10">
         <div class="text-center hero-content">
-            <h1 class="text-7xl font-extrabold mb-6 text-gray-900">Project Status</h1>
-            <p class="text-xl text-gray-600 mb-10 max-w-3xl mx-auto">This project is still under development and not available for public viewing.</p>
-            <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">You can test the prototype! Just message me on any platform:</p>
-            <div class="flex justify-center space-x-4 mb-8">
-                <a href="https://instagram.com/jayansharyan" target="_blank" class="custom-button bg-purple-600 rounded-lg p-2">
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-6 text-gray-900">Project Status</h1>
+            <p class="text-lg md:text-xl text-gray-600 mb-8 max-w-3xl mx-auto">This project is still under development and not available for public viewing.</p>
+            <p class="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl mx-auto">You can test the prototype! Just message me on any platform:</p>
+            <div class="flex flex-wrap justify-center gap-4 mb-8 social-buttons">
+                <a href="https://instagram.com/a_lonely_ooo" target="_blank" class="custom-button bg-purple-600 text-white rounded-lg p-3">
                     <img src="https://cdnjs.cloudflare.com/ajax/libs/simple-icons/10.0.0/instagram.svg" alt="Instagram" class="social-icon">
+                    <span>Instagram</span>
                 </a>
-                <a href="https://t.me/jayansharyan" target="_blank" class="custom-button bg-purple-600 rounded-lg p-2">
+                <a href="https://t.me/a_lonely_ooo" target="_blank" class="custom-button bg-purple-600 text-white rounded-lg p-3">
                     <img src="https://cdnjs.cloudflare.com/ajax/libs/simple-icons/10.0.0/telegram.svg" alt="Telegram" class="social-icon">
+                    <span>Telegram</span>
                 </a>
-                <a href="https://discord.com/users/jayansharyan" target="_blank" class="custom-button bg-purple-600 rounded-lg p-2">
+                <a href="https://discord.com/users/a_lonely_ooo" target="_blank" class="custom-button bg-purple-600 text-white rounded-lg p-3">
                     <img src="https://cdnjs.cloudflare.com/ajax/libs/simple-icons/10.0.0/discord.svg" alt="Discord" class="social-icon">
+                    <span>Discord</span>
                 </a>
             </div>
         </div>
     </section>
 
-    <footer class="bg-gray-900 text-white py-10 text-center">
-        <div class="flex justify-center space-x-4 mb-4">
-            <a href="https://instagram.com/jayansharyan" target="_blank" class="custom-button bg-purple-600 rounded-lg p-2">
-                <img src="https://cdnjs.cloudflare.com/ajax/libs/simple-icons/10.0.0/instagram.svg" alt="Instagram" class="social-icon">
-            </a>
-            <a href="https://t.me/jayansharyan" target="_blank" class="custom-button bg-purple-600 rounded-lg p-2">
-                <img src="https://cdnjs.cloudflare.com/ajax/libs/simple-icons/10.0.0/telegram.svg" alt="Telegram" class="social-icon">
-            </a>
-            <a href="https://discord.com/users/jayansharyan" target="_blank" class="custom-button bg-purple-600 rounded-lg p-2">
-                <img src="https://cdnjs.cloudflare.com/ajax/libs/simple-icons/10.0.0/discord.svg" alt="Discord" class="social-icon">
-            </a>
-            <a href="https://github.com/jayansharyan" target="_blank" class="custom-button bg-purple-600 rounded-lg p-2">
-                <img src="https://cdnjs.cloudflare.com/ajax/libs/simple-icons/10.0.0/github.svg" alt="GitHub" class="social-icon">
-            </a>
-            <a href="https://x.com/jayansharyan" target="_blank" class="custom-button bg-purple-600 rounded-lg p-2">
-                <img src="https://cdnjs.cloudflare.com/ajax/libs/simple-icons/10.0.0/x.svg" alt="X" class="social-icon">
-            </a>
-            <a href="https://twitter.com/jayansharyan" target="_blank" class="custom-button bg-purple-600 rounded-lg p-2">
-                <img src="https://cdnjs.cloudflare.com/ajax/libs/simple-icons/10.0.0/twitter.svg" alt="Twitter" class="social-icon">
-            </a>
+    <footer class="bg-gray-900 text-white py-8 text-center px-5">
+                  
         </div>
         <p class="text-sm">© 2025 Jayansh Aryan. All rights reserved.</p>
-        <p class="text-xs mt-2">Crafted with passion | Last updated: June 30, 2025</p>
+        <p class="text-xs mt-2 opacity-80">Crafted with passion | Last updated: June 30, 2025</p>
     </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-            gsap.from("body", { opacity: 0, duration: 2, ease: "power3.out" });
-
-            gsap.from(".hero-content", { opacity: 0, y: 100, duration: 2.2, ease: "power3.out" });
-
-            document.querySelectorAll('a[href^="index.html#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    window.location.href = this.getAttribute('href');
+            // Mobile navigation toggle
+            const hamburger = document.querySelector('.hamburger');
+            const mobileNav = document.querySelector('.mobile-nav');
+            const closeMobileNav = document.querySelector('.close-mobile-nav');
+            
+            hamburger.addEventListener('click', () => {
+                mobileNav.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+            
+            closeMobileNav.addEventListener('click', () => {
+                mobileNav.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+            
+            // Close mobile nav when clicking a link
+            document.querySelectorAll('.mobile-nav a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileNav.classList.remove('active');
+                    document.body.style.overflow = '';
                 });
             });
 
+            // Initial animations
+            gsap.from("body", { opacity: 0, duration: 1.5, ease: "power3.out" });
+            gsap.from(".hero-content", { 
+                opacity: 0, 
+                y: 50, 
+                duration: 1.5, 
+                ease: "power3.out",
+                delay: 0.3
+            });
+
+            // Footer animations
             gsap.from("footer .flex a", {
                 scrollTrigger: {
                     trigger: "footer",
-                    start: "top 85%"
+                    start: "top 90%",
+                    once: true
                 },
                 opacity: 0,
                 y: 40,
                 scale: 0.9,
-                stagger: 0.4,
-                duration: 1.5,
-                ease: "bounce.out"
+                stagger: 0.2,
+                duration: 1,
+                ease: "elastic.out(1, 0.5)"
             });
 
-            gsap.utils.toArray(".parallax").forEach(section => {
-                gsap.to(section, {
-                    backgroundPosition: () => `center ${window.scrollY * 0.3}px`,
-                    ease: "none",
-                    scrollTrigger: {
-                        trigger: section,
-                        start: "top bottom",
-                        end: "bottom top",
-                        scrub: 1.2
-                    }
-                });
+            // Refresh ScrollTrigger on resize
+            window.addEventListener('resize', () => {
+                ScrollTrigger.refresh();
             });
         });
     </script>
